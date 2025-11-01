@@ -4,12 +4,15 @@ import com.fiap.usu.exceptions.BaseBusinessException;
 import com.fiap.usu.validations.ValidationMessages;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.net.URI;
 import java.time.Instant;
@@ -17,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -95,4 +99,42 @@ public class ControllerExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ProblemDetail handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex,
+                                                                      HttpServletRequest request,
+                                                                      Locale locale) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.METHOD_NOT_ALLOWED);
+        problemDetail.setTitle("Método HTTP não permitido");
+
+        String supportedMethods = ex.getSupportedHttpMethods() != null
+                ? ex.getSupportedHttpMethods().stream()
+                .map(HttpMethod::name)
+                .collect(Collectors.joining(", "))
+                : "";
+
+        Object[] args = new String[]{ex.getMethod(),supportedMethods};
+        problemDetail.setDetail(messageSource.getMessage(ValidationMessages.METHOD_NOT_ALLOWED,
+                args,locale)
+        );
+        problemDetail.setType(URI.create("https://example.com/problems/method-not-allowed"));
+        problemDetail.setProperty("timestamp", Instant.now());
+        problemDetail.setProperty("path", request.getRequestURI());
+
+        return problemDetail;
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ProblemDetail handleNoResourceFoundException(NoResourceFoundException ex,
+                                                        HttpServletRequest request,
+                                                        Locale locale) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle("Recurso nao encontrado");
+
+        problemDetail.setDetail(messageSource.getMessage(ValidationMessages.RESOURCE_NOT_FOUND, null, locale));
+        problemDetail.setType(URI.create("https://example.com/problems/resource-not-found"));
+        problemDetail.setProperty("timestamp", Instant.now());
+        problemDetail.setProperty("path", request.getRequestURI());
+
+        return problemDetail;
+    }
 }

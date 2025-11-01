@@ -35,6 +35,8 @@ public final class ValidationMessages {
 
     // ---------------- Erros gerais ----------------
     public static final String FORBIDDEN = "error.forbidden";
+    public static final String RESOURCE_NOT_FOUND = "error.resource.notfound";
+    public static final String METHOD_NOT_ALLOWED = "error.method.not.allowed";
 
     private ValidationMessages() {
         // impede instanciação

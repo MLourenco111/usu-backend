@@ -13,11 +13,10 @@ import com.fiap.usu.repositories.UserAddressRepository;
 import com.fiap.usu.utils.AddressUtils;
 import com.fiap.usu.utils.StringUtils;
 import com.fiap.usu.validations.AddressValidationResult;
-import com.fiap.usu.validations.AddressValidationService;
 import com.fiap.usu.validations.ValidationMessages;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashSet;
@@ -26,7 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Repository
+@Service
 public class UserAddressService {
 
     private final AddressValidationService addressValidationService;

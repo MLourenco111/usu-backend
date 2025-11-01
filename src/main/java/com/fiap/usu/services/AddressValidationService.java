@@ -1,7 +1,9 @@
-package com.fiap.usu.validations;
+package com.fiap.usu.services;
 
 import com.fiap.usu.dtos.ViaCepResponse;
 import com.fiap.usu.utils.AddressUtils;
+import com.fiap.usu.validations.AddressValidationResult;
+import com.fiap.usu.validations.ValidationMessages;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

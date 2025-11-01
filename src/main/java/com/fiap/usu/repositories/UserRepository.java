@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     @Query("""
-                SELECT new com.fiap.techfood.dtos.user.UserPagedDto(
+                SELECT new com.fiap.usu.dtos.user.UserPagedDto(
                     u.id, u.name, u.email, u.login,
                     u.createdAt, u.updatedAt, u.status,
                     u.birthday, u.document

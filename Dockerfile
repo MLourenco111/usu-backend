@@ -1,22 +1,16 @@
 # ============================================
 # Build stage
 # ============================================
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM maven:3.9.4-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app
 
-# Copia arquivos do Maven Wrapper
-COPY pom.xml mvnw ./
-COPY .mvn .mvn
-
-# Garante permissão de execução para o mvnw
-RUN chmod +x mvnw
-
-# Copia o código-fonte
+# Copia arquivos essenciais
+COPY pom.xml .
 COPY src src
 
 # Build da aplicação sem rodar testes
-RUN ./mvnw clean package -DskipTests -B
+RUN mvn clean package -DskipTests -B
 
 # ============================================
 # Runtime stage
