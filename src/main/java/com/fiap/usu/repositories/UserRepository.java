@@ -23,14 +23,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     @Query("""
-                SELECT new com.fiap.usu.dtos.user.UserPagedDto(
-                    u.id, u.name, u.email, u.login,
-                    u.createdAt, u.updatedAt, u.status,
-                    u.birthday, u.document
-                )
-                FROM User u
-                WHERE (:name IS NULL OR LOWER(u.name) LIKE LOWER(CONCAT('%', :name, '%')))
-            """)
+    SELECT new com.fiap.usu.dtos.user.UserPagedDto(
+        u.id, u.name, u.email, u.login,
+        u.createdAt, u.updatedAt, u.status,
+        u.birthday, u.document
+    )
+    FROM User u
+    WHERE (:name IS NULL OR UPPER(u.name) LIKE UPPER(CONCAT('%', CAST(:name AS string), '%'))
+    )
+    """)
     Page<UserPagedDto> getUsersPaged(Pageable pageable, @Param("name") String name);
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.phones LEFT JOIN FETCH u.types LEFT JOIN FETCH u.addresses LEFT JOIN FETCH u.addresses.address WHERE u.id = :id")

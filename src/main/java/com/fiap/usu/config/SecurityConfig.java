@@ -96,7 +96,7 @@ public class SecurityConfig {
         var jwtFilter = new JwtAuthFilter(jwtUtil, userService);
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/users/v1").permitAll()
                         .requestMatchers("/auth/**", "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**")
                         .permitAll().anyRequest().authenticated());
 

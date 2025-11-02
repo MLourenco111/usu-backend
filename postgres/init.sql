@@ -11,11 +11,11 @@ CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
     version BIGINT NOT NULL,
     status BOOLEAN NOT NULL DEFAULT TRUE,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT now(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     login VARCHAR(80) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     name VARCHAR(200),
     document VARCHAR(30) NOT NULL UNIQUE,
     birthday DATE,
@@ -118,7 +118,7 @@ WHERE NOT EXISTS (SELECT 1 FROM users_type WHERE id = 3);
 -- Usuário padrão (somente se não existir)
 -- ============================================
 INSERT INTO users (login, email, password, name, document, version)
-SELECT 'admin', 'admin@fiap.com', 'admin123', 'Administrador', '00000000000', 1
+SELECT 'admin', 'admin@fiap.com', '$2a$10$5QEihSAKxtpHQtPFmLTY3eDm8C4RBJ33eaAnubeRdVxPSr36/Vrbq', 'Administrador', '00000000000', 1
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE login = 'admin');
 
 -- ============================================
