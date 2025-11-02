@@ -11,7 +11,7 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info().title("TechFood API").version("1.0")
-                .description("API para gerenciamento de usuários no TechFood"));
+        return new OpenAPI().info(new Info().title("Usu Backend API").version("1.0")
+                .description("API para gerenciamento de usuários"));
     }
 }
