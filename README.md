@@ -97,7 +97,7 @@ Abaixo estão os procedimentos para cada abordagem.
    ```
 
 Após a execução, a aplicação estará disponível em:  
-👉 [http://localhost:8080](http://localhost:8080)
+👉 [http://localhost:8080/usu/](http://localhost:8080/usu/)
 
 ---
 
@@ -121,7 +121,7 @@ Após a execução, a aplicação estará disponível em:
    ```
 
 Após a inicialização:
-- **Aplicação:** [http://localhost:8080](http://localhost:8080)  
+- **Aplicação:** [http://localhost:8080/usu/](http://localhost:8080/usu/)  
 - **Banco de dados PostgreSQL:** porta `5432`
 
 > 💡 Por se tratar de um projeto acadêmico, tanto a execução via Docker quanto a execução local utilizam as mesmas portas padrão:
@@ -134,7 +134,7 @@ Após a inicialização:
 
 A documentação dos endpoints pode ser acessada após iniciar o projeto:
 
-👉 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+👉 [http://localhost:8080/usu/swagger-ui.html](http://localhost:8080/usu/swagger-ui.html)
 
 O Swagger lista todos os endpoints disponíveis, incluindo:
 - Criação de usuários  
@@ -156,7 +156,7 @@ source/postman/usu-backend-collection.json
 1. Importe a collection no Postman.  
 2. Configure o ambiente `Local` com a variável base:
    ```
-   base_url = http://localhost:8080
+   base_url = http://localhost:8080/usu/
    ```
 3. Execute os testes na ordem recomendada.
 
