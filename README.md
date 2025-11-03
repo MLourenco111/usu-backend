@@ -165,27 +165,8 @@ source/postman/usu-backend-collection.json
 - **Usuário padrão para testes:**
   ```
   login: admin
-  senha: 123456
+  senha: Fiap@2025
   ```
 - O header `Accept-Language` pode ser alterado para ajustar o idioma das mensagens:
   - `en-US` → Inglês (padrão)
   - `pt-BR` → Português
-
----
-
-## 🗄️ Estrutura do Banco de Dados
-
-Tabela principal: **users**
-
-| Campo       | Tipo        | Descrição                          |
-|--------------|-------------|------------------------------------|
-| id           | UUID        | Identificador único do usuário     |
-| name         | VARCHAR     | Nome completo                      |
-| email        | VARCHAR     | E-mail do usuário (único)          |
-| login        | VARCHAR     | Nome de login                      |
-| password     | VARCHAR     | Senha criptografada                |
-| status       | BOOLEAN     | Indica se o usuário está ativo     |
-| created_at   | TIMESTAMP   | Data de criação                    |
-| updated_at   | TIMESTAMP   | Data da última atualização         |
-
----
