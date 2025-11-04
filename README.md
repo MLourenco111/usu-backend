@@ -33,7 +33,6 @@ O sistema segue o padrão **MVC (Model-View-Controller)**, organizado em camadas
 - **DTOs:** Utilizados para transferir dados entre as camadas, garantindo segurança e clareza na comunicação.
 - **Entities:** Mapeiam as tabelas do banco de dados.
 - **Exception Handling:** Implementação de tratamento de erros global e mensagens padronizadas.
-- **Swagger:** Documentação automática dos endpoints.
 
 ---
 
